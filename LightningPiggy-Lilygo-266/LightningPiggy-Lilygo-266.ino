@@ -20,9 +20,10 @@
 
 GxIO_Class io(SPI,  EPD_CS, EPD_DC,  EPD_RSET);
 GxEPD_Class display(io, EPD_RSET, EPD_BUSY);
-
--const char* ssid     = "[SSID]"; // wifi SSID here
--const char* password = "[PASSWORD HERE]"; // wifi password here
+int sleeptime = 1;
+String strlnurl = "LNURLPAYLINK"; // your LNURL Pay Link string here e.g. LNURL1DP68GURN8GHJ7UMPW3EJUURH9AKXUATJD3CZ7CTSDYHHVVF0D3H82UNV9UEQDZ3CM3
+const char* ssid     = "[SSID]"; // wifi SSID here
+const char* password = "[PASSWORD HERE]"; // wifi password here
 
 const char* host = "legend.lnbits.com"; // HOST NAME HERE E.G. legend.lnbits.com
 const char* invoiceKey = "[INVOICE KEY HERE]"; // lnbits wallet invoice hey here
@@ -80,13 +81,13 @@ void loop()
 
   display.fillScreen(GxEPD_WHITE);
   printBalance();
-  getLNURLPayments(5);
+  getLNURLPayments(3);
   display.update();
   delay(10000);
   // getLNURLp();
   // showLNURLpQR();
   // display.display(false); // full update
-  hibernate(6 * 60 * 60);
+  hibernate(6 * 60 * sleeptime);
 }
 
 void printBalance() {
@@ -132,7 +133,7 @@ void getLNURLPayments(int limit) {
   const uint8_t maxPaymentDetailStrLength = 30; // The maximum number of chars that should be displayed for each payment
   const String url = "/api/v1/payments?limit=" + String(limit);
   const String line = getEndpointData(url);
-  StaticJsonDocument<4000> doc;
+  StaticJsonDocument<3000> doc; //reduced from 4000 to troubleshoot run error
   Serial.println("Got payments");
   Serial.println(line);
 
@@ -198,7 +199,7 @@ String getLNURLp() {
 }
 
 void showLNURLpQR() {
-  qrData = "LNURL1DP68GURN8GHJ7UMPW3EJUURH9AKXUATJD3CZ7CTSDYHHVVF0D3H82UNV9UEQDZ3CM3";
+  qrData = "strlnurl";
   const char *qrDataChar = qrData.c_str();
   QRCode qrcoded;
 
