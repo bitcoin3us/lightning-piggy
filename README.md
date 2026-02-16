@@ -98,3 +98,5 @@ To make a new release available on the web installer:
 ESP32 emulation with QEMU (including WiFi!)
 ===================
 See [these detailed instructions on ESP32 emulation with QEMU, including WiFi](Emulation.md).
+
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/LightningPiggy/lightning-piggy)
