@@ -7,9 +7,6 @@
 [![GitHub last commit](https://img.shields.io/github/last-commit/LightningPiggy/lightning-piggy)](https://github.com/LightningPiggy/lightning-piggy/commits/master)
 [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/LightningPiggy/lightning-piggy)
 
-Lightning Piggy
-====
-
 Bitcoin Lightning piggybank using LNBits (for LNURLp) running on TTGO LilyGo ePaper hardware with ESP32 microcontroller.
 
 See https://www.lightningpiggy.com/ and https://makers.bolt.fun/project/lightningpiggy
