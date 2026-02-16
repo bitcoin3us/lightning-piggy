@@ -1,3 +1,12 @@
+# Lightning Piggy
+
+[![License: LGPL-2.1](https://img.shields.io/github/license/LightningPiggy/lightning-piggy)](https://github.com/LightningPiggy/lightning-piggy/blob/master/LICENSE)
+[![GitHub release](https://img.shields.io/github/v/release/LightningPiggy/lightning-piggy)](https://github.com/LightningPiggy/lightning-piggy/releases)
+[![GitHub stars](https://img.shields.io/github/stars/LightningPiggy/lightning-piggy)](https://github.com/LightningPiggy/lightning-piggy/stargazers)
+[![GitHub issues](https://img.shields.io/github/issues/LightningPiggy/lightning-piggy)](https://github.com/LightningPiggy/lightning-piggy/issues)
+[![GitHub last commit](https://img.shields.io/github/last-commit/LightningPiggy/lightning-piggy)](https://github.com/LightningPiggy/lightning-piggy/commits/master)
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/LightningPiggy/lightning-piggy)
+
 Lightning Piggy
 ====
 
@@ -98,5 +107,3 @@ To make a new release available on the web installer:
 ESP32 emulation with QEMU (including WiFi!)
 ===================
 See [these detailed instructions on ESP32 emulation with QEMU, including WiFi](Emulation.md).
-
-[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/LightningPiggy/lightning-piggy)
