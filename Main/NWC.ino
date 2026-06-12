@@ -225,7 +225,19 @@ String getNWCURLParam(const String &param) {
 }
 
 // The wallet's Lightning Address from the NWC URL's lud16 parameter,
-// or "" if it doesn't carry one.
+// prefixed with the lightning: URI scheme, or "" if the URL doesn't
+// carry one.
+//
+// The prefix matters for the receive QR: phone cameras and wallet
+// scanners dispatch lightning:-scheme QRs straight into a Lightning-
+// enabled app, whereas a bare user@host scans as plain text on many
+// of them. Idempotent in case a generator ever includes the scheme
+// in the parameter itself.
 String getLud16FromNWCURL() {
-  return getNWCURLParam("lud16");
+  String lud16 = getNWCURLParam("lud16");
+  if (lud16.length() == 0) return lud16;
+  String lower = lud16;
+  lower.toLowerCase();
+  if (lower.startsWith("lightning:")) return lud16;
+  return "lightning:" + lud16;
 }
