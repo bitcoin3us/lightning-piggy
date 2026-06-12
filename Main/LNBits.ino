@@ -27,14 +27,18 @@ int getWalletBalance() {
   String walletName = doc["name"];
 
   if (walletName == "null") {
-    Serial.println("ERROR: could not find wallet details on lnbits host " + String(lnbitsHost) + " with invoice/read key " + String(lnbitsInvoiceKey) + " so something's wrong! Did you make a typo?");
+    Serial.println("ERROR: could not find wallet details on lnbits host " + String(lnbitsHost) + " with the configured invoice/read key (not printed) so something's wrong! Did you make a typo?");
     return NOT_SPECIFIED;
   } else {
     Serial.print("Wallet name: " + walletName);
   }
 
-  int walletBalance = doc["balance"];
-  walletBalance = walletBalance / 1000;
+  // Balance is in MILLISATS — an int overflows at 2^31 msat which is only
+  // ~2.15 million sats (~0.0215 BTC), turning bigger balances negative.
+  // Parse as long long (the same trick paymentJsonToString already uses
+  // for amounts) and convert to sats before going back to int.
+  long long walletBalanceMsat = doc["balance"];
+  int walletBalance = (int)(walletBalanceMsat / 1000);
 
   Serial.println(" contains " + String(walletBalance) + " sats");
   return walletBalance+balanceBiasInt;
