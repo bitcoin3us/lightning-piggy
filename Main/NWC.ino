@@ -124,7 +124,10 @@ void subscribeNWC() {
 
             long long amount = notification.amount; // millisats to sats
             if (notification.type == "outgoing") amount = -amount; // outgoing is negative, otherwise positive
-            setBalance(getConfigValueAsInt((char*)balanceBias, 0) + getBalance() + (amount/1000));
+            // The running balance already includes the configured
+            // balance bias (applied once in nwc_getBalance) — adding it
+            // again here would accumulate the bias on every payment.
+            setBalance(getBalance() + (amount/1000));
             lastUpdatedBalance = millis();
             resetLastPaymentReceivedMillis();
 
@@ -144,7 +147,9 @@ void nwc_getBalance() {
   setGetBalanceDone(false);
   nwc->getBalance([&](nostr::GetBalanceResponse resp) {
     Serial.println("[!] Balance: " + String(resp.balance) + " msatoshis");
-    setBalance(resp.balance/1000);
+    // Apply the configured balance bias here, once per fetch — the same
+    // semantics as the LNBits path (getWalletBalance adds it on fetch).
+    setBalance(resp.balance/1000 + getConfigValueAsInt((char*)balanceBias, 0));
     setGetBalanceDone(true);
   }, [](String err, String errMsg) {
     Serial.println("[!] Error: " + err + " " + errMsg);
