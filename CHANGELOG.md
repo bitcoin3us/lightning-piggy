@@ -1,3 +1,7 @@
+**Unreleased**
+- NWC: use the Lightning Address from the NWC URL's `lud16` parameter as the receive code, so an NWC-only piggy shows a receive QR without also having to fill in the static receive code manually (coinos and LNBits' nwcprovider include it in generated URLs)
+- NWC: prefix the receive QR with the `lightning:` URI scheme so phone cameras and wallet scanners open a Lightning-enabled app instead of treating it as plain text
+
 **6.3.0**
 - Update Adafruit BusIO from 1.15.0 to 1.17.0
 - Update Adafruit GFX Library from 1.11.9 to 1.12.0
