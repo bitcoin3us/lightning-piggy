@@ -1,3 +1,14 @@
+**Unreleased**
+- Fix LNBits balance display overflowing at ~0.0215 BTC (the millisat balance was parsed into a 32-bit int, so bigger wallets showed negative garbage)
+- Fix NWC balance bias being re-added on every payment notification (N payments inflated the display by N x bias), and apply the bias to the initial NWC balance fetch like the LNBits path does
+- Fix a single failed Bitcoin price lookup poisoning the fiat balance display with 0 for the next 15 minutes
+- Fix an out-of-bounds write in the payment list when it is full (and when a payment arrives before the first fetch), which could corrupt memory
+- Fix the config-save handler reading past the HTTP request buffer (config saves could occasionally crash the device)
+- Fix the tilt-sensor interrupt firing continuously while the piggy is tilted (level-triggered instead of edge-triggered), and a missing `volatile` on its ISR flag
+- Stop printing secrets to the serial console: the WiFi password, LNBits invoice key, NWC URL (which contains the wallet secret) and posted config bodies are now redacted
+- Reject non-2xx HTTP responses in the shared fetch helper instead of treating error pages as data (the update checker could previously "find" an update in a 404 page)
+- Ignore websocket payment notifications without a wallet_balance field instead of displaying a zero balance
+
 **6.3.0**
 - Update Adafruit BusIO from 1.15.0 to 1.17.0
 - Update Adafruit GFX Library from 1.11.9 to 1.12.0
